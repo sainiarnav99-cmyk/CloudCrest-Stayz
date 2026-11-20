@@ -1,0 +1,8 @@
+{
+  "name": "Remix CloudCrest Stayz",
+  "description": "CloudCrest Stayz - Luxury vacation stays and mountain getaways booking platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

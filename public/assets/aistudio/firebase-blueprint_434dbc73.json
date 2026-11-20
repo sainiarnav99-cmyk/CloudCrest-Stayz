@@ -1,0 +1,276 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated CloudCrest Stayz member profile registered via Google Sign-In.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Firebase Auth UID of the registered member."
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Member display name from Google account."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 254,
+          "description": "Verified Google account email address (PII, owner-only readable)."
+        },
+        "photoURL": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Optional Google profile avatar URL."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["member"],
+          "description": "Immutable client-registered role."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the member first registered."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of latest sign-in or profile sync."
+        }
+      },
+      "required": ["uid", "displayName", "email", "role", "createdAt", "updatedAt"]
+    },
+    "SavedStayFavorite": {
+      "title": "SavedStayFavorite",
+      "description": "A user's saved mountain sanctuary bookmark.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Owner Firebase Auth UID."
+        },
+        "stayId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Identifier of the saved CloudCrest sanctuary."
+        },
+        "stayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140,
+          "description": "Display name of the saved sanctuary."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when saved."
+        }
+      },
+      "required": ["userId", "stayId", "stayName", "createdAt"]
+    },
+    "StayBooking": {
+      "title": "StayBooking",
+      "description": "Confirmed or cancelled sanctuary reservation belonging to a registered member.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Firebase Auth UID of the member who placed the reservation."
+        },
+        "stayId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Identifier of the reserved stay."
+        },
+        "stayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140,
+          "description": "Sanctuary name at time of booking."
+        },
+        "stayLocation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140,
+          "description": "Sanctuary location at time of booking."
+        },
+        "nights": {
+          "type": "integer",
+          "description": "Number of reserved nights (1 to 14)."
+        },
+        "guests": {
+          "type": "integer",
+          "description": "Number of guests (1 to 8)."
+        },
+        "totalAmount": {
+          "type": "number",
+          "description": "Estimated total in INR."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["confirmed", "cancelled"],
+          "description": "Booking lifecycle status; cancelled is terminal."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when reservation was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when reservation was last updated."
+        }
+      },
+      "required": [
+        "userId",
+        "stayId",
+        "stayName",
+        "stayLocation",
+        "nights",
+        "guests",
+        "totalAmount",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "StayReview": {
+      "title": "StayReview",
+      "description": "Verified member review displayed in the TestimonialsCarousel for a specific stay (contains no PII).",
+      "type": "object",
+      "properties": {
+        "stayId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Target sanctuary ID."
+        },
+        "authorUid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Author Firebase Auth UID."
+        },
+        "guestName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80,
+          "description": "Attributable guest display name."
+        },
+        "guestInitials": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4,
+          "description": "Monogram initials."
+        },
+        "guestRole": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80,
+          "description": "Guest travel context or profession."
+        },
+        "guestCity": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80,
+          "description": "Origin city."
+        },
+        "stayDate": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 40,
+          "description": "Month and year of stay."
+        },
+        "nightsStayed": {
+          "type": "integer",
+          "description": "Nights stayed (1 to 30)."
+        },
+        "rating": {
+          "type": "number",
+          "description": "Overall rating from 1 to 5."
+        },
+        "highlight": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 120,
+          "description": "Concise highlight summary."
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 1000,
+          "description": "Guest testimonial prose."
+        },
+        "isPublished": {
+          "type": "boolean",
+          "description": "Whether the review is visible in the stay carousel."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last edit."
+        }
+      },
+      "required": [
+        "stayId",
+        "authorUid",
+        "guestName",
+        "guestInitials",
+        "guestRole",
+        "guestCity",
+        "stayDate",
+        "nightsStayed",
+        "rating",
+        "highlight",
+        "quote",
+        "isPublished",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Owner-isolated member profile containing Google Sign-In identity and email PII."
+    },
+    "/users/{userId}/favorites/{stayId}": {
+      "schema": { "$ref": "#/entities/SavedStayFavorite" },
+      "description": "Per-user saved mountain sanctuary favorites subcollection."
+    },
+    "/bookings/{bookingId}": {
+      "schema": { "$ref": "#/entities/StayBooking" },
+      "description": "Member sanctuary reservations scoped by userId."
+    },
+    "/stayReviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/StayReview" },
+      "description": "Member-authored guest reviews displayed inside each stay's TestimonialsCarousel."
+    }
+  }
+}

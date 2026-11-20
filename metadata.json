@@ -1,0 +1,8 @@
+{
+  "name": "CloudCrest Stayz",
+  "description": "CloudCrest Stayz — Luxury ridge-top sanctuary and heritage boutique hotel in Mussoorie, Uttarakhand.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

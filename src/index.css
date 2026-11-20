@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-obsidian-950: #04060a;
+  --color-obsidian-900: #060a13;
+  --color-obsidian-800: #090f1c;
+  --color-obsidian-700: #0f192e;
+  --color-glacial-50: #ffffff;
+  --color-glacial-100: #f3f6fb;
+  --color-glacial-200: #cbd5e1;
+  --color-sapphire-300: #93c5fd;
+  --color-sapphire-400: #60a5fa;
+  --color-sapphire-500: #3b82f6;
+  --color-sapphire-600: #2563eb;
+  --color-sapphire-700: #1d4ed8;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #04060a;
+    color: #f3f6fb;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #04060a;
+    color: #f3f6fb;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Animated Mussoorie Topographic & Mist Textures (Compositor-Only Animations)
+   --------------------------------------------------------------------------- */
+@keyframes mussoorieMistSlow {
+  0% {
+    transform: translate3d(-4%, 0, 0) scale(1.04);
+    opacity: 0.38;
+  }
+  50% {
+    transform: translate3d(4%, -1.5%, 0) scale(1.08);
+    opacity: 0.62;
+  }
+  100% {
+    transform: translate3d(-4%, 0, 0) scale(1.04);
+    opacity: 0.38;
+  }
+}
+
+@keyframes mussoorieMistCounter {
+  0% {
+    transform: translate3d(5%, 1%, 0) scale(1.05);
+    opacity: 0.28;
+  }
+  50% {
+    transform: translate3d(-5%, -1%, 0) scale(1.02);
+    opacity: 0.48;
+  }
+  100% {
+    transform: translate3d(5%, 1%, 0) scale(1.05);
+    opacity: 0.28;
+  }
+}
+
+@keyframes mussoorieContourBreathe {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.52;
+  }
+  50% {
+    transform: translate3d(-1.2%, 1%, 0) scale(1.025);
+    opacity: 0.78;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.52;
+  }
+}
+
+@keyframes mussoorieCloudGlide {
+  0% {
+    transform: translate3d(-6%, 0, 0);
+  }
+  50% {
+    transform: translate3d(6%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-6%, 0, 0);
+  }
+}
+
+.animate-mussoorie-mist-slow {
+  animation: mussoorieMistSlow 22s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-mussoorie-mist-counter {
+  animation: mussoorieMistCounter 28s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-mussoorie-contour {
+  animation: mussoorieContourBreathe 18s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-mussoorie-cloud {
+  animation: mussoorieCloudGlide 32s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Fine obsidian slate & sapphire atmospheric micro-grain */
+.mussoorie-mineral-grain {
+  background-image: radial-gradient(rgba(96, 165, 250, 0.16) 1px, transparent 0),
+    radial-gradient(rgba(243, 246, 251, 0.05) 1px, transparent 0);
+  background-size: 32px 32px, 19px 19px;
+  background-position: 0 0, 9px 11px;
+}
+
+.mussoorie-mineral-grain-light {
+  background-image: radial-gradient(rgba(10, 15, 26, 0.08) 1px, transparent 0),
+    radial-gradient(rgba(29, 78, 216, 0.07) 1px, transparent 0);
+  background-size: 28px 28px, 17px 17px;
+  background-position: 0 0, 8px 9px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-mussoorie-mist-slow,
+  .animate-mussoorie-mist-counter,
+  .animate-mussoorie-contour,
+  .animate-mussoorie-cloud {
+    animation: none !important;
+    transform: none !important;
+  }
+}
